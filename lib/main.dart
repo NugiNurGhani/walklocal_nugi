@@ -152,7 +152,7 @@ class MainPage extends StatelessWidget {
                                 ListTile(
                                   leading: Icon(Icons.location_on, color: Colors.green,size: 35.0,),
                                   title: Text("Rumah Tercinta",style: TextStyle(fontWeight: FontWeight.bold),),
-                                  subtitle: Text("Petunjungan, Bulakamba, Brebes"),
+                                  subtitle: Text("Petunjungan, Bulakamba, tegal"),
                                 ),
                               ],
                             )

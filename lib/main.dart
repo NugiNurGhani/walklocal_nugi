@@ -152,7 +152,7 @@ class MainPage extends StatelessWidget {
                                 ListTile(
                                   leading: Icon(Icons.location_on, color: Colors.green,size: 35.0,),
                                   title: Text("Rumah Tercinta",style: TextStyle(fontWeight: FontWeight.bold),),
-                                  subtitle: Text("Petunjungan, Bulakamba, tegal"),
+                                  subtitle: Text("Petunjungan, Bulakamba, Brebes"),
                                 ),
                               ],
                             )
@@ -657,13 +657,13 @@ class ViewThirdPageState extends State<ViewThirdPage>
           children: <Widget>[
             Expanded(
               child: new Container(
-                padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
-                alignment: Alignment.centerRight,
-                child: AnimatedOpacity(
-                  child: new Icon(Icons.keyboard_arrow_left),
-                    opacity: _prev ? 1.0 : 0.0,
-                    duration: Duration(milliseconds: 200)
-                )
+                  padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+                  alignment: Alignment.centerRight,
+                  child: AnimatedOpacity(
+                      child: new Icon(Icons.keyboard_arrow_left),
+                      opacity: _prev ? 1.0 : 0.0,
+                      duration: Duration(milliseconds: 200)
+                  )
               ),
             ),
             new Row(
@@ -671,7 +671,12 @@ class ViewThirdPageState extends State<ViewThirdPage>
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.all(4.0),
-                  child: new AnimatedSize(duration: null, vsync: AnimatedListState())
+                  child: new AnimatedCrossFade(
+                      firstChild: new Icon(Icons.brightness_1,size: 10.0,color: Colors.black,),
+                      secondChild: new Icon(Icons.brightness_1,size: 10.0,color: Colors.grey,),
+                      crossFadeState: _one ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+                      duration: Duration(milliseconds: 100)
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(4.0),

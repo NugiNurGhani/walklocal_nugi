@@ -2,18 +2,12 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(MaterialApp(
-    home: MainPage(),
+    home: LandingPage(),
   ));
 }
 
-bool _prev = false;
-bool _one = true;
-bool _two = false;
-bool _three = false;
-bool _four = false;
-bool _next = true;
+class LandingPage extends StatelessWidget {
 
-class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -93,7 +87,7 @@ class MainPage extends StatelessWidget {
                               onPressed: (){
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => SecondPage()),
+                                  MaterialPageRoute(builder: (context) => SearchPage()),
                                 );
                               },
                               highlightColor: Colors.white70,
@@ -165,10 +159,9 @@ class MainPage extends StatelessWidget {
           ),
         )
     );
-  }
-}
+  }}
 
-class SecondPage extends StatelessWidget {
+class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -176,126 +169,133 @@ class SecondPage extends StatelessWidget {
         theme: ThemeData(
             primarySwatch: Colors.green
         ),
-        home: new Scaffold(
-            appBar: PreferredSize(
-                child: AppBar(
-                  backgroundColor: Colors.white,
-                  leading: new IconButton(
-                      icon: Icon(Icons.keyboard_arrow_left,
-                        size: 35.0,
-                        color: Colors.black,
-                      ),
-                      onPressed: (){
-                        Navigator.pop(context);
-                      }
+        home: ViewSearchPage());
+  }
+}
+
+class ViewSearchPage extends StatefulWidget{
+  @override
+  ViewSearchPageState createState() => ViewSearchPageState();
+
+}
+
+class ViewSearchPageState extends State<ViewSearchPage>{
+  
+  var addressText = TextEditingController();
+
+  final addressList = List<String>();
+
+  void addAddress(String a){
+    setState(() {
+      addressList.add(a);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+        appBar: PreferredSize(
+            child: AppBar(
+              backgroundColor: Colors.white,
+              leading: new IconButton(
+                  icon: Icon(Icons.keyboard_arrow_left,
+                    size: 35.0,
+                    color: Colors.black,
                   ),
-                  title: Padding(
-                    padding: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 5.0),
-                    child: new TextField(
-                      decoration:
-                      InputDecoration(
-                        contentPadding: EdgeInsets.fromLTRB(13.0, 10.0, 10.0, 13.0),
-                        hintText: "Mau pergi ke mana?",
-                        hintStyle: TextStyle(fontSize: 22.0),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0)
-                        ),
-                      ),
+                  onPressed: (){
+                    Navigator.pop(context);
+                  }
+              ),
+              title: Padding(
+                padding: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 5.0),
+                child: new TextField(
+                  controller: addressText,
+                  onSubmitted: (a){
+                    addressText = TextEditingController();
+                    addAddress(a);
+                    
+                  },
+                  decoration:
+                  InputDecoration(
+                    contentPadding: EdgeInsets.fromLTRB(13.0, 10.0, 10.0, 13.0),
+                    hintText: "Mau pergi ke mana?",
+                    hintStyle: TextStyle(fontSize: 22.0),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0)
                     ),
                   ),
                 ),
-                preferredSize: Size.fromHeight(60.0)),
-            body: new Column(
-              children: <Widget>[
-                new Container(
-                  child: Padding(
-                      padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-                      child: new ButtonTheme(
-                        height: 70.0,
-                        child: FlatButton(
-                            onPressed: (){},
-                            child: new Row(
-                              children: <Widget>[
-                                Icon(
-                                  Icons.map,
-                                  color: Colors.green,
-                                  size: 35.0,
-                                ),
-                                Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(20.0, 0.0, 0.0, 0.0),
-                                      child: Text("Pilih dari peta",
-                                        style: TextStyle(fontSize: 20.0),
-                                      ),
-                                    )
-                                ),
-                                Icon(Icons.keyboard_arrow_right,size: 30.0,)
-                              ],
-                            )),
-                      )
-                  ),
-                ),
-                Expanded(
-                    child: new MediaQuery.removePadding(
-                        context: context,
-                        removeTop: true,
-                        child: new ListView(
+              ),
+            ),
+            preferredSize: Size.fromHeight(60.0)),
+        body: new Column(
+          children: <Widget>[
+            new Container(
+              child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+                  child: new ButtonTheme(
+                    height: 70.0,
+                    child: FlatButton(
+                        onPressed: (){},
+                        child: new Row(
                           children: <Widget>[
-                            Divider(indent: 73.0,),
-                            ListTile(
-                              leading: Icon(Icons.location_on, color: Colors.green,size: 35.0,),
-                              title: Text("Universitas AMIKOM Yogyakarta",style: TextStyle(fontWeight: FontWeight.bold),),
-                              subtitle: Text("Condong Catur, Depok, Sleman"),
+                            Icon(
+                              Icons.map,
+                              color: Colors.green,
+                              size: 35.0,
                             ),
-                            Divider(indent: 73.0,),
-                            ListTile(
-                              leading: Icon(Icons.location_on, color: Colors.green,size: 35.0,),
-                              title: Text("EDS Building Universitas Gajah Mada",style: TextStyle(fontWeight: FontWeight.bold),),
-                              subtitle: Text("Sinduadi, Mlati, Sleman"),
+                            Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.fromLTRB(20.0, 0.0, 0.0, 0.0),
+                                  child: Text("Pilih dari peta",
+                                    style: TextStyle(fontSize: 20.0),
+                                  ),
+                                )
                             ),
-                            Divider(indent: 73.0,),
-                            ListTile(
-                              leading: Icon(Icons.location_on, color: Colors.green,size: 35.0,),
-                              title: Text("Kos Tercinta",style: TextStyle(fontWeight: FontWeight.bold),),
-                              subtitle: Text("Condong Catur, Depok, Sleman"),
-                            ),
-                            Divider(indent: 73.0,),
-                            ListTile(
-                              leading: Icon(Icons.location_on, color: Colors.green,size: 35.0,),
-                              title: Text("Rumah Tercinta",style: TextStyle(fontWeight: FontWeight.bold),),
-                              subtitle: Text("Petunjungan, Bulakamba, Brebes"),
-                            ),
+                            Icon(Icons.keyboard_arrow_right,size: 30.0,)
                           ],
-                        )
-                    )
-                ),
-                new Container(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: new ButtonTheme(
-                          minWidth: 400.0,
-                          height: 60.0,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                          child: new RaisedButton(
-                            onPressed: (){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => ThirdPage()),
-                              );
-                            },
-                            color: Colors.green,
-                            child: new Text("Start navigation",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20.0),),)
-                      ),
-                    )
+                        )),
+                  )
+              ),
+            ),
+            Expanded(
+              child:ListView.builder(
+                itemCount: addressList.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    leading: Icon(Icons.location_on,color: Colors.green,),
+                    title: Text('${addressList[index]}'),
+                  );
+                },
+              ),
+            ),
+            new Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: new ButtonTheme(
+                      minWidth: 400.0,
+                      height: 60.0,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+                      child: new RaisedButton(
+                        onPressed: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => NavigationPage()),
+                          );
+                        },
+                        color: Colors.green,
+                        child: new Text("Start navigation",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20.0),),)
+                  ),
                 )
-              ],
             )
+          ],
         )
     );
+
   }
 }
 
-class ThirdPage extends StatelessWidget {
+class NavigationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -303,23 +303,27 @@ class ThirdPage extends StatelessWidget {
         theme: ThemeData(
             primarySwatch: Colors.green
         ),
-        home: new Scaffold(
-          body: ViewThirdPage(),
-        )
+        home: ViewNavigationPage(),
     );
   }
 }
 
-class ViewThirdPage extends StatefulWidget{
+class ViewNavigationPage extends StatefulWidget{
   @override
-  ViewThirdPageState createState() => ViewThirdPageState();
+  ViewNavigationPageState createState() => ViewNavigationPageState();
 
 }
 
-class ViewThirdPageState extends State<ViewThirdPage>
-{
-  void _pageChanger (int i)
-  {
+class ViewNavigationPageState extends State<ViewNavigationPage>{
+
+  bool _prev = false;
+  bool _one = true;
+  bool _two = false;
+  bool _three = false;
+  bool _four = false;
+  bool _next = true;
+
+  void _pageChanger(int i) {
     setState(() {
       if(i==0){
         _prev = false;
@@ -358,369 +362,363 @@ class ViewThirdPageState extends State<ViewThirdPage>
 
   @override
   Widget build(BuildContext context) {
-    return new Column(
-      children: <Widget>[
-        Stack(
+    return new Scaffold(
+        body: new Column(
           children: <Widget>[
-            new Container(
-              height: 660.0,
-              width: 474.0,
-              child: new Image.asset("assets/navigation.jpeg", fit: BoxFit.fill,),
-            ),
-            Positioned(
-              child: new RaisedButton(
-                onPressed: (){},
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(
-                    Icons.gps_fixed,color: Colors.green, size: 35.0,),
-                ),
-                shape: CircleBorder(),
-                color: Colors.white,
-              ),
-              bottom: 70.0,
-              left: 400.0,
-            ),
-            Positioned(
-              child: new RaisedButton(
-                onPressed: (){},
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(
-                    Icons.navigation,color: Colors.orange, size: 35.0,),
-                ),
-                shape: CircleBorder(),
-                color: Colors.white,
-              ),
-              bottom: 10.0,
-              left: 400.0,
-            ),
-          ],
-        ),
-        Expanded(
-            child: new Stack(
+            Stack(
               children: <Widget>[
-                new PageView(
-                  onPageChanged: _pageChanger,
-                  children: <Widget>[
-                    new Container(
-                        child: new Row(
-                          children: <Widget>[
-                            new Card(
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                              color: Colors.blue,
-                              child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Icon(Icons.directions_walk, size: 65.0,color: Colors.white,),
-                              ),
-                            ),
-                            Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
-                                  child: new Column(
-                                    children: <Widget>[
-                                      Expanded(
-                                        child: Container(
-                                          alignment: Alignment.topLeft,
-                                          child: new Text(
-                                            "110 m",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 28.0,
-                                                color: Colors.blue
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      new Container(
-                                        alignment: Alignment.topLeft,
-                                        child: new Text(
-                                          "Jalan untuk 10 menit",
-                                          style: TextStyle(
-                                              fontSize: 18.0,
-                                              color: Colors.blue
-                                          ),
-                                        ),
-                                      ),
-                                      new Container(
-                                        alignment: Alignment.topLeft,
-                                        child: new Text(
-                                          "Menuju halte Transjogja JEC",
-                                          style: TextStyle(
-                                              fontSize: 18.0,
-                                              color: Colors.blue
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                            )
-                          ],
-                        )
-                    ),
-                    new Container(
-                        child: new Row(
-                          children: <Widget>[
-                            new Card(
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                              color: Colors.green,
-                              child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Icon(Icons.directions_bus, size: 65.0,color: Colors.white,),
-                              ),
-                            ),
-                            Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
-                                  child: new Column(
-                                    children: <Widget>[
-                                      Expanded(
-                                        child: Container(
-                                          alignment: Alignment.topLeft,
-                                          child: new Text(
-                                            "TransJogja U2",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 28.0,
-                                                color: Colors.green
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      new Container(
-                                        alignment: Alignment.topLeft,
-                                        child: new Text(
-                                          "Tujuan Terminal Condong Catur",
-                                          style: TextStyle(
-                                              fontSize: 18.0,
-                                              color: Colors.green
-                                          ),
-                                        ),
-                                      ),
-                                      new Container(
-                                        alignment: Alignment.topLeft,
-                                        child: new Text(
-                                          "Turun di Halte UPN",
-                                          style: TextStyle(
-                                              fontSize: 18.0,
-                                              color: Colors.green
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                            )
-                          ],
-                        )
-                    ),
-                    new Container(
-                        child: new Row(
-                          children: <Widget>[
-                            new Card(
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                              color: Colors.blue,
-                              child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Icon(Icons.directions_walk, size: 65.0,color: Colors.white,),
-                              ),
-                            ),
-                            Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
-                                  child: new Column(
-                                    children: <Widget>[
-                                      Expanded(
-                                        child: Container(
-                                          alignment: Alignment.topLeft,
-                                          child: new Text(
-                                            "110 m",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 28.0,
-                                                color: Colors.blue
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      new Container(
-                                        alignment: Alignment.topLeft,
-                                        child: new Text(
-                                          "Jalan untuk 10 menit",
-                                          style: TextStyle(
-                                              fontSize: 18.0,
-                                              color: Colors.blue
-                                          ),
-                                        ),
-                                      ),
-                                      new Container(
-                                        alignment: Alignment.topLeft,
-                                        child: new Text(
-                                          "Menuju halte Transjogja JEC",
-                                          style: TextStyle(
-                                              fontSize: 18.0,
-                                              color: Colors.blue
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                            )
-                          ],
-                        )
-                    ),
-                    new Container(
-                        child: new Row(
-                          children: <Widget>[
-                            new Card(
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                              color: Colors.green,
-                              child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Icon(Icons.directions_bus, size: 65.0,color: Colors.white,),
-                              ),
-                            ),
-                            Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
-                                  child: new Column(
-                                    children: <Widget>[
-                                      Expanded(
-                                        child: Container(
-                                          alignment: Alignment.topLeft,
-                                          child: new Text(
-                                            "TransJogja U2",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 28.0,
-                                                color: Colors.green
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      new Container(
-                                        alignment: Alignment.topLeft,
-                                        child: new Text(
-                                          "Tujuan Terminal Condong Catur",
-                                          style: TextStyle(
-                                              fontSize: 18.0,
-                                              color: Colors.green
-                                          ),
-                                        ),
-                                      ),
-                                      new Container(
-                                        alignment: Alignment.topLeft,
-                                        child: new Text(
-                                          "Turun di Halte UPN",
-                                          style: TextStyle(
-                                              fontSize: 18.0,
-                                              color: Colors.green
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                            )
-                          ],
-                        )
-                    )
-                  ],
+                new Container(
+                  height: 660.0,
+                  width: 474.0,
+                  child: new Image.asset("assets/navigation.jpeg", fit: BoxFit.fill,),
                 ),
                 Positioned(
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: ButtonTheme(
-                        minWidth: 80.0,
-                        height: 60.0,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                        child: new RaisedButton(
-                          onPressed: (){
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => MainPage()),
-                            );
-                          },
-                          color: Colors.red,
-                          child: new Text("End",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20.0),),)
+                  child: new RaisedButton(
+                    onPressed: (){},
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(
+                        Icons.gps_fixed,color: Colors.green, size: 35.0,),
                     ),
+                    shape: CircleBorder(),
+                    color: Colors.white,
                   ),
-                  bottom: 20.0,
-                  left: 380.0,
+                  bottom: 70.0,
+                  left: 400.0,
+                ),
+                Positioned(
+                  child: new RaisedButton(
+                    onPressed: (){},
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(
+                        Icons.navigation,color: Colors.orange, size: 35.0,),
+                    ),
+                    shape: CircleBorder(),
+                    color: Colors.white,
+                  ),
+                  bottom: 10.0,
+                  left: 400.0,
+                ),
+              ],
+            ),
+            Expanded(
+                child: new Stack(
+                  children: <Widget>[
+                    new PageView(
+                      onPageChanged: _pageChanger,
+                      children: <Widget>[
+                        new Row(
+                          children: <Widget>[
+                            new Card(
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                              color: Colors.blue,
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Icon(Icons.directions_walk, size: 65.0,color: Colors.white,),
+                              ),
+                            ),
+                            Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
+                                  child: new Column(
+                                    children: <Widget>[
+                                      Expanded(
+                                        child: Container(
+                                          alignment: Alignment.topLeft,
+                                          child: new Text(
+                                            "110 m",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 28.0,
+                                                color: Colors.blue
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      new Container(
+                                        alignment: Alignment.topLeft,
+                                        child: new Text(
+                                          "Jalan untuk 10 menit",
+                                          style: TextStyle(
+                                              fontSize: 18.0,
+                                              color: Colors.blue
+                                          ),
+                                        ),
+                                      ),
+                                      new Container(
+                                        alignment: Alignment.topLeft,
+                                        child: new Text(
+                                          "Menuju halte Transjogja JEC",
+                                          style: TextStyle(
+                                              fontSize: 18.0,
+                                              color: Colors.blue
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                            )
+                          ],
+                        ),
+                        new Row(
+                          children: <Widget>[
+                            new Card(
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                              color: Colors.green,
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Icon(Icons.directions_bus, size: 65.0,color: Colors.white,),
+                              ),
+                            ),
+                            Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
+                                  child: new Column(
+                                    children: <Widget>[
+                                      Expanded(
+                                        child: Container(
+                                          alignment: Alignment.topLeft,
+                                          child: new Text(
+                                            "TransJogja U2",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 28.0,
+                                                color: Colors.green
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      new Container(
+                                        alignment: Alignment.topLeft,
+                                        child: new Text(
+                                          "Tujuan Terminal Condong Catur",
+                                          style: TextStyle(
+                                              fontSize: 18.0,
+                                              color: Colors.green
+                                          ),
+                                        ),
+                                      ),
+                                      new Container(
+                                        alignment: Alignment.topLeft,
+                                        child: new Text(
+                                          "Turun di Halte UPN",
+                                          style: TextStyle(
+                                              fontSize: 18.0,
+                                              color: Colors.green
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                            )
+                          ],
+                        ),
+                        new Row(
+                          children: <Widget>[
+                            new Card(
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                              color: Colors.blue,
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Icon(Icons.directions_walk, size: 65.0,color: Colors.white,),
+                              ),
+                            ),
+                            Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
+                                  child: new Column(
+                                    children: <Widget>[
+                                      Expanded(
+                                        child: Container(
+                                          alignment: Alignment.topLeft,
+                                          child: new Text(
+                                            "110 m",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 28.0,
+                                                color: Colors.blue
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      new Container(
+                                        alignment: Alignment.topLeft,
+                                        child: new Text(
+                                          "Jalan untuk 10 menit",
+                                          style: TextStyle(
+                                              fontSize: 18.0,
+                                              color: Colors.blue
+                                          ),
+                                        ),
+                                      ),
+                                      new Container(
+                                        alignment: Alignment.topLeft,
+                                        child: new Text(
+                                          "Menuju halte Transjogja JEC",
+                                          style: TextStyle(
+                                              fontSize: 18.0,
+                                              color: Colors.blue
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                            )
+                          ],
+                        ),
+                        new Row(
+                          children: <Widget>[
+                            new Card(
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                              color: Colors.green,
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Icon(Icons.directions_bus, size: 65.0,color: Colors.white,),
+                              ),
+                            ),
+                            Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
+                                  child: new Column(
+                                    children: <Widget>[
+                                      Expanded(
+                                        child: Container(
+                                          alignment: Alignment.topLeft,
+                                          child: new Text(
+                                            "TransJogja U2",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 28.0,
+                                                color: Colors.green
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      new Container(
+                                        alignment: Alignment.topLeft,
+                                        child: new Text(
+                                          "Tujuan Terminal Condong Catur",
+                                          style: TextStyle(
+                                              fontSize: 18.0,
+                                              color: Colors.green
+                                          ),
+                                        ),
+                                      ),
+                                      new Container(
+                                        alignment: Alignment.topLeft,
+                                        child: new Text(
+                                          "Turun di Halte UPN",
+                                          style: TextStyle(
+                                              fontSize: 18.0,
+                                              color: Colors.green
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                    Positioned(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ButtonTheme(
+                            minWidth: 80.0,
+                            height: 60.0,
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+                            child: new RaisedButton(
+                              onPressed: (){
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => LandingPage()),
+                                );
+                              },
+                              color: Colors.red,
+                              child: new Text("End",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20.0),),)
+                        ),
+                      ),
+                      bottom: 20.0,
+                      left: 380.0,
+                    ),
+                  ],
+                )
+            ),
+            new Row(
+              children: <Widget>[
+                Expanded(
+                  child: new Container(
+                      padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+                      alignment: Alignment.centerRight,
+                      child: AnimatedOpacity(
+                          child: new Icon(Icons.keyboard_arrow_left),
+                          opacity: _prev ? 1.0 : 0.0,
+                          duration: Duration(milliseconds: 200)
+                      )
+                  ),
+                ),
+                new Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: new AnimatedCrossFade(
+                          firstChild: new Icon(Icons.brightness_1,size: 10.0,color: Colors.black,),
+                          secondChild: new Icon(Icons.brightness_1,size: 10.0,color: Colors.grey,),
+                          crossFadeState: _one ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+                          duration: Duration(milliseconds: 100)
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: new AnimatedCrossFade(
+                          firstChild: new Icon(Icons.brightness_1,size: 10.0,color: Colors.black,),
+                          secondChild: new Icon(Icons.brightness_1,size: 10.0,color: Colors.grey,),
+                          crossFadeState: _two ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+                          duration: Duration(milliseconds: 100)
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: new AnimatedCrossFade(
+                          firstChild: new Icon(Icons.brightness_1,size: 10.0,color: Colors.black,),
+                          secondChild: new Icon(Icons.brightness_1,size: 10.0,color: Colors.grey,),
+                          crossFadeState: _three ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+                          duration: Duration(milliseconds: 100)
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: new AnimatedCrossFade(
+                          firstChild: new Icon(Icons.brightness_1,size: 10.0,color: Colors.black,),
+                          secondChild: new Icon(Icons.brightness_1,size: 10.0,color: Colors.grey,),
+                          crossFadeState: _four ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+                          duration: Duration(milliseconds: 100)
+                      ),
+                    ),
+                  ],
+                ),
+                Expanded(
+                  child: new Container(
+                      padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+                      alignment: Alignment.centerLeft,
+                      child: AnimatedOpacity(
+                          child: new Icon(Icons.keyboard_arrow_right),
+                          opacity: _next ? 1.0 : 0.0,
+                          duration: Duration(milliseconds: 200)
+                      )
+                  ),
                 ),
               ],
             )
-        ),
-        new Row(
-          children: <Widget>[
-            Expanded(
-              child: new Container(
-                  padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
-                  alignment: Alignment.centerRight,
-                  child: AnimatedOpacity(
-                      child: new Icon(Icons.keyboard_arrow_left),
-                      opacity: _prev ? 1.0 : 0.0,
-                      duration: Duration(milliseconds: 200)
-                  )
-              ),
-            ),
-            new Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: new AnimatedCrossFade(
-                      firstChild: new Icon(Icons.brightness_1,size: 10.0,color: Colors.black,),
-                      secondChild: new Icon(Icons.brightness_1,size: 10.0,color: Colors.grey,),
-                      crossFadeState: _one ? CrossFadeState.showFirst : CrossFadeState.showSecond,
-                      duration: Duration(milliseconds: 100)
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: new AnimatedCrossFade(
-                      firstChild: new Icon(Icons.brightness_1,size: 10.0,color: Colors.black,),
-                      secondChild: new Icon(Icons.brightness_1,size: 10.0,color: Colors.grey,),
-                      crossFadeState: _two ? CrossFadeState.showFirst : CrossFadeState.showSecond,
-                      duration: Duration(milliseconds: 100)
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: new AnimatedCrossFade(
-                      firstChild: new Icon(Icons.brightness_1,size: 10.0,color: Colors.black,),
-                      secondChild: new Icon(Icons.brightness_1,size: 10.0,color: Colors.grey,),
-                      crossFadeState: _three ? CrossFadeState.showFirst : CrossFadeState.showSecond,
-                      duration: Duration(milliseconds: 100)
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: new AnimatedCrossFade(
-                      firstChild: new Icon(Icons.brightness_1,size: 10.0,color: Colors.black,),
-                      secondChild: new Icon(Icons.brightness_1,size: 10.0,color: Colors.grey,),
-                      crossFadeState: _four ? CrossFadeState.showFirst : CrossFadeState.showSecond,
-                      duration: Duration(milliseconds: 100)
-                  ),
-                ),
-              ],
-            ),
-            Expanded(
-              child: new Container(
-                  padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
-                  alignment: Alignment.centerLeft,
-                  child: AnimatedOpacity(
-                      child: new Icon(Icons.keyboard_arrow_right),
-                      opacity: _next ? 1.0 : 0.0,
-                      duration: Duration(milliseconds: 200)
-                  )
-              ),
-            ),
           ],
-        )
-      ],
+        ),
     );
   }
 }

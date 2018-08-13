@@ -41,119 +41,113 @@ class LandingPage extends StatelessWidget {
                   )
                 ],
               ),
-              Expanded(
-                child: new Column(
-                  children: <Widget>[
-                    new Container(
-                        margin: EdgeInsets.all(12.0),
-                        child: new Row(
-                          children: <Widget>[
-                            Expanded(
-                                child: new Column(
-                                  children: <Widget>[
-                                    new Container(
-                                      child: new Text("Rabu, 1 Agustus 2018", style: new TextStyle(color: Colors.grey, fontSize: 20.0)),
-                                      alignment: Alignment.topLeft,
-                                    ),
-                                    new Container(
-                                      child: new Text("Selamat Siang Nugi", style: new TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),),
-                                      alignment: Alignment.topLeft,
-                                      padding: EdgeInsets.fromLTRB(0.0, 7.0, 0.0, 0.0),
-                                    ),
-                                  ],
-                                )
-                            ),
-                            new Container(
-                                width: 50.0,
-                                height: 50.0,
-                                decoration: new BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: new DecorationImage(
-                                        fit: BoxFit.fill,
-                                        image: new AssetImage("assets/user.jpg")
-                                    )
-                                )),
-                          ],
-                        )
-                    ),
-                    new Container(
-                      margin: EdgeInsets.fromLTRB(12.0, 0.0, 12.0, 0.0),
-                      child: Padding(
-                          padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
-                          child: new ButtonTheme(
-                            minWidth: 200.0,
-                            height: 60.0,
-                            child: new FlatButton(
-                              onPressed: (){
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => SearchPage()),
-                                );
-                              },
-                              highlightColor: Colors.white70,
-                              color: Colors.white70,
-                              shape: new RoundedRectangleBorder(
-                                  borderRadius: new BorderRadius.circular(10.0),
-                                  side: BorderSide(color: Colors.grey)),
-                              child: Row(
-                                children: <Widget>[
-                                  new Icon(Icons.search, color: Colors.green,size: 35.0,),
-                                  Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 0.0),
-                                      child: new Text("Mau pergi ke mana?",
-                                        style: TextStyle(
-                                            fontSize: 20.0,
-                                            color: Colors.grey
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  new Icon(Icons.directions,color: Colors.green,size: 35.0,)
-                                ],
+              new Container(
+                  margin: EdgeInsets.all(12.0),
+                  child: new Row(
+                    children: <Widget>[
+                      Expanded(
+                          child: new Column(
+                            children: <Widget>[
+                              new Container(
+                                child: new Text("Rabu, 1 Agustus 2018", style: new TextStyle(color: Colors.grey, fontSize: 20.0)),
+                                alignment: Alignment.topLeft,
                               ),
-                            ),
+                              new Container(
+                                child: new Text("Selamat Siang Nugi", style: new TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),),
+                                alignment: Alignment.topLeft,
+                                padding: EdgeInsets.fromLTRB(0.0, 7.0, 0.0, 0.0),
+                              ),
+                            ],
                           )
                       ),
-                    ),
-                    Divider(
-                      color: Colors.grey,
-                    ),
-                    Expanded(
-                        child: MediaQuery.removePadding(
-                            context: context,
-                            removeTop: true,
-                            child: new ListView(
-                              children: <Widget>[
-                                ListTile(
-                                  leading: Icon(Icons.location_on, color: Colors.green,size: 35.0,),
-                                  title: Text("Universitas AMIKOM Yogyakarta",style: TextStyle(fontWeight: FontWeight.bold),),
-                                  subtitle: Text("Condong Catur, Depok, Sleman"),
+                      new Container(
+                          width: 50.0,
+                          height: 50.0,
+                          decoration: new BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: new DecorationImage(
+                                  fit: BoxFit.fill,
+                                  image: new AssetImage("assets/user.jpg")
+                              )
+                          )),
+                    ],
+                  )
+              ),
+              new Container(
+                margin: EdgeInsets.fromLTRB(12.0, 0.0, 12.0, 0.0),
+                child: Padding(
+                    padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
+                    child: new ButtonTheme(
+                      minWidth: 200.0,
+                      height: 60.0,
+                      child: new FlatButton(
+                        onPressed: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => SearchPage()),
+                          );
+                        },
+                        highlightColor: Colors.white70,
+                        color: Colors.white70,
+                        shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(10.0),
+                            side: BorderSide(color: Colors.grey)),
+                        child: Row(
+                          children: <Widget>[
+                            new Icon(Icons.search, color: Colors.green,size: 35.0,),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 0.0),
+                                child: new Text("Mau pergi ke mana?",
+                                  style: TextStyle(
+                                      fontSize: 20.0,
+                                      color: Colors.grey
+                                  ),
                                 ),
-                                Divider(indent: 73.0,),
-                                ListTile(
-                                  leading: Icon(Icons.location_on, color: Colors.green,size: 35.0,),
-                                  title: Text("EDS Building Universitas Gajah Mada",style: TextStyle(fontWeight: FontWeight.bold),),
-                                  subtitle: Text("Sinduadi, Mlati, Sleman"),
-                                ),
-                                Divider(indent: 73.0,),
-                                ListTile(
-                                  leading: Icon(Icons.location_on, color: Colors.green,size: 35.0,),
-                                  title: Text("Kos Tercinta",style: TextStyle(fontWeight: FontWeight.bold),),
-                                  subtitle: Text("Condong Catur, Depok, Sleman"),
-                                ),
-                                Divider(indent: 73.0,),
-                                ListTile(
-                                  leading: Icon(Icons.location_on, color: Colors.green,size: 35.0,),
-                                  title: Text("Rumah Tercinta",style: TextStyle(fontWeight: FontWeight.bold),),
-                                  subtitle: Text("Petunjungan, Bulakamba, Brebes"),
-                                ),
-                              ],
-                            )
-                        )
+                              ),
+                            ),
+                            new Icon(Icons.directions,color: Colors.green,size: 35.0,)
+                          ],
+                        ),
+                      ),
                     )
-                  ],
                 ),
+              ),
+              Divider(
+                color: Colors.grey,
+              ),
+              Expanded(
+                  child: MediaQuery.removePadding(
+                      context: context,
+                      removeTop: true,
+                      child: new ListView(
+                        children: <Widget>[
+                          ListTile(
+                            leading: Icon(Icons.location_on, color: Colors.green,size: 35.0,),
+                            title: Text("Universitas AMIKOM Yogyakarta",style: TextStyle(fontWeight: FontWeight.bold),),
+                            subtitle: Text("Condong Catur, Depok, Sleman"),
+                          ),
+                          Divider(indent: 73.0,),
+                          ListTile(
+                            leading: Icon(Icons.location_on, color: Colors.green,size: 35.0,),
+                            title: Text("EDS Building Universitas Gajah Mada",style: TextStyle(fontWeight: FontWeight.bold),),
+                            subtitle: Text("Sinduadi, Mlati, Sleman"),
+                          ),
+                          Divider(indent: 73.0,),
+                          ListTile(
+                            leading: Icon(Icons.location_on, color: Colors.green,size: 35.0,),
+                            title: Text("Kos Tercinta",style: TextStyle(fontWeight: FontWeight.bold),),
+                            subtitle: Text("Condong Catur, Depok, Sleman"),
+                          ),
+                          Divider(indent: 73.0,),
+                          ListTile(
+                            leading: Icon(Icons.location_on, color: Colors.green,size: 35.0,),
+                            title: Text("Rumah Tercinta",style: TextStyle(fontWeight: FontWeight.bold),),
+                            subtitle: Text("Petunjungan, Bulakamba, Brebes"),
+                          ),
+                        ],
+                      )
+                  )
               )
             ],
           ),
